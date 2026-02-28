@@ -1,0 +1,16 @@
+# Personal/local files
+.claude/settings.local.json
+memory/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Project-specific files (users create their own)
+proje/*.md
+!proje/CLAUDE.md
+!proje/SABLON.md
