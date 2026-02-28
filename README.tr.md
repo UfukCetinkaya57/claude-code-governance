@@ -1,104 +1,104 @@
-[English](README.md)
+﻿[English](README.md)
 
 # Backend Governance Framework
 
-Claude Code CLI'yi yapilandirilmis bir muhendislik takimina donusturen, cok katmanli kalite ve guvenlik pipeline'i ile backend gelistirmeyi yoneten governance framework'u.
+Claude Code CLI'yı yapılandırılmış bir mühendislik takımına dönüştüren, çok katmanlı kalite ve güvenlik pipeline'ı ile backend geliştirmeyi yöneten governance framework'ü.
 
 ---
 
-## Proje Aciklamasi
+## Proje Açıklaması
 
-Bu framework, Claude Code'u bir **Team Lead / Koordinator** olarak calistirir. Claude kodu kendisi yazmak yerine, uzman sub-agent'lara delege eder ve her gorev icin uygun pipeline'i secer.
+Bu framework, Claude Code'u bir **Team Lead / Koordinatör** olarak çalıştırır. Claude kodu kendisi yazmak yerine, uzman sub-agent'lara delege eder ve her görev için uygun pipeline'ı seçer.
 
-Backend gelistirme icin tasarlanmistir. .NET, Node.js ve Laravel icin hazir stack profilleri icerir.
+Backend geliştirme için tasarlanmıştır. .NET, Node.js ve Laravel için hazır stack profilleri içerir.
 
 ---
 
-## Temel Ozellikler
+## Temel Özellikler
 
 ### 5 Uzman Agent
 
 | Agent | Rol |
 |-------|-----|
 | `backend-developer` | Kod yazar: endpoint, service, migration, validation |
-| `security-reviewer` | Guvenlik review: auth, injection, CORS, brute force |
-| `quality-gate` | 11 nokta kalite kontrol ve test degerlendirmesi |
-| `architect` | Mimari karar, YAGNI kontrolu, ADR |
+| `security-reviewer` | Güvenlik review: auth, injection, CORS, brute force |
+| `quality-gate` | 11 nokta kalite kontrol ve test değerlendirmesi |
+| `architect` | Mimari karar, YAGNI kontrolü, ADR |
 | `devops` | Deployment, Docker, monitoring, logging, rollback |
 
 ### 3 Kademeli Pipeline (Maliyet / Kalite Dengesi)
 
-| Kademe | Kapsam | Agent Sayisi |
+| Kademe | Kapsam | Agent Sayısı |
 |--------|--------|--------------|
-| **Hafif** | Tek dosya degisikligi, auth/DB yok | 1 agent |
-| **Normal** | Standart feature'lar (varsayilan) | 2 agent |
-| **Tam** | Auth, odeme, migration, public API | 3-4 agent |
+| **Hafif** | Tek dosya değişikliği, auth/DB yok | 1 agent |
+| **Normal** | Standart feature'lar (varsayılan) | 2 agent |
+| **Tam** | Auth, ödeme, migration, public API | 3-4 agent |
 
-### 4 Muhendislik Modu
+### 4 Mühendislik Modu
 
-| Mod | Kullanim | Sertlik |
+| Mod | Kullanım | Sertlik |
 |-----|----------|---------|
-| `explore` | Deneysel, PoC, spike | Dusuk |
-| `build` | Standart feature (varsayilan) | Normal |
-| `harden` | Auth, odeme, migration, guvenlik | Yuksek |
-| `incident` | Canli hata, veri kaybi, acil rollback | Kritik |
+| `explore` | Deneysel, PoC, spike | Düşük |
+| `build` | Standart feature (varsayılan) | Normal |
+| `harden` | Auth, ödeme, migration, güvenlik | Yüksek |
+| `incident` | Canlı hata, veri kaybı, acil rollback | Kritik |
 
-### Diger Ozellikler
+### Diğer Özellikler
 
-- **Feedback Dongusu** — Sub-agent'lar birbirleriyle direkt konusamaz. Tum iletisim Team Lead uzerinden gecer. Maksimum 3 dongu, sonra kullaniciya eskalasyon.
-- **Catisma Onceligi** — Guvenlik > Dogruluk > Basitlik > Performans
-- **Proje Kesfi** — Stack, DB ve mimari yapiyi otomatik tespit eder.
-- **Coklu Stack Destegi** — .NET, Node.js, Laravel icin hazir profiller.
+- **Feedback Döngüsü** — Sub-agent'lar birbirleriyle direkt konuşamaz. Tüm iletişim Team Lead üzerinden geçer. Maksimum 3 döngü, sonra kullanıcıya eskalasyon.
+- **Çatışma Önceliği** — Güvenlik > Doğruluk > Basitlik > Performans
+- **Proje Keşfi** — Stack, DB ve mimari yapıyı otomatik tespit eder.
+- **Çoklu Stack Desteği** — .NET, Node.js, Laravel için hazır profiller.
 
 ---
 
-## Klasor Yapisi
+## Klasör Yapısı
 
 ```
 backend-governance/
-├── CLAUDE.md                  # Ana governance anlasmasi (Team Lead talimatlari)
-├── .claude/agents/            # Agent tanimlari
+├── CLAUDE.md                  # Ana governance anlaşması (Team Lead talimatları)
+├── .claude/agents/            # Agent tanımları
 │   ├── backend-developer.md
 │   ├── security-reviewer.md
 │   ├── quality-gate.md
 │   ├── architect.md
 │   ├── devops.md
 │   └── qa-engineer.md
-├── api/CLAUDE.md              # API kurallari
+├── api/CLAUDE.md              # API kuralları
 ├── backend/CLAUDE.md          # Backend pattern'leri
-├── guvenlik/CLAUDE.md         # Guvenlik kurallari
-├── kalite/CLAUDE.md           # Kalite standartlari
-├── karar/CLAUDE.md            # Karar kayitlari (ADR)
+├── guvenlik/CLAUDE.md         # Güvenlik kuralları
+├── kalite/CLAUDE.md           # Kalite standartları
+├── karar/CLAUDE.md            # Karar kayıtları (ADR)
 ├── mimari/CLAUDE.md           # Mimari kurallar
 ├── operasyon/CLAUDE.md        # Operasyon ve izleme
 ├── proje/                     # Proje profilleri
-│   ├── CLAUDE.md              # Proje profilleri nasil calisir
-│   └── SABLON.md              # Yeni projeler icin sablon
-├── qa/CLAUDE.md               # QA sureci
-├── stack/                     # Stack'e ozel kurallar
+│   ├── CLAUDE.md              # Proje profilleri nasıl çalışır
+│   └── SABLON.md              # Yeni projeler için şablon
+├── qa/CLAUDE.md               # QA süreci
+├── stack/                     # Stack'e özel kurallar
 │   ├── CLAUDE.md
 │   ├── dotnet.md
 │   ├── nodejs.md
 │   └── laravel.md
-├── surec/                     # Surecler ve is akislari
-│   ├── CLAUDE.md              # Pipeline detaylari, feedback donguleri
-│   ├── proje-kesfi.md         # Proje kesif sureci
-│   └── deployment.md          # Deployment sureci
-├── test/CLAUDE.md             # Test kurallari
-└── veri/CLAUDE.md             # Veri ve veritabani kurallari
+├── surec/                     # Süreçler ve iş akışları
+│   ├── CLAUDE.md              # Pipeline detayları, feedback döngüleri
+│   ├── proje-kesfi.md         # Proje keşif süreci
+│   └── deployment.md          # Deployment süreci
+├── test/CLAUDE.md             # Test kuralları
+└── veri/CLAUDE.md             # Veri ve veritabanı kuralları
 ```
 
 ---
 
-## Hizli Baslangic
+## Hızlı Başlangıç
 
-**1. Repo'yu klonlayin**
+**1. Repo'yu klonlayın**
 
 ```bash
 git clone https://github.com/UfukCetinkaya57/claude-code-governance.git
 ```
 
-**2. Projenizden backend-governance'a symlink olusturun**
+**2. Projenizden backend-governance'a symlink oluşturun**
 
 ```bash
 # Linux / Mac
@@ -108,52 +108,52 @@ ln -s /path/to/backend-governance /path/to/your-project/backend-governance
 mklink /D "C:\path\to\your-project\backend-governance" "C:\path\to\backend-governance"
 ```
 
-> Governance dizinini ASLA kopyalamayin. Her zaman symlink kullanin. Boylece bu repo'daki guncellemeler tum projelerinize aninda yansir.
+> Governance dizinini ASLA kopyalamayın. Her zaman symlink kullanın. Böylece bu repo'daki güncellemeler tüm projelerinize anında yansır.
 
-**3. CLAUDE.md otomatik algilanir**
+**3. CLAUDE.md otomatik algılanır**
 
-Claude Code, proje kokunde bulunan `CLAUDE.md` dosyasini otomatik olarak algilar. Ek yapilandirma gerekmez.
+Claude Code, proje kökünde bulunan `CLAUDE.md` dosyasını otomatik olarak algılar. Ek yapılandırma gerekmez.
 
-**4. Proje profili olusturun**
+**4. Proje profili oluşturun**
 
 ```bash
 cp backend-governance/proje/SABLON.md backend-governance/proje/my-project.md
 ```
 
-Sablon dosyasini projenize gore doldurun: stack, DB, mimari, aktif servisler.
+Şablon dosyasını projenize göre doldurun: stack, DB, mimari, aktif servisler.
 
-**5. Calismaya baslayin**
+**5. Çalışmaya başlayın**
 
-Claude Code'a bir gorev verin. Claude Team Lead olarak hareket edecektir.
-
----
-
-## Nasil Calisir
-
-1. Claude Code'a bir gorev verirsiniz.
-2. Claude (Team Lead olarak) gorevi analiz eder, muhendislik modunu ve pipeline kademesini secer.
-3. Uygulamayi `backend-developer`'a delege eder.
-4. Gorev auth veya guvenlik iceriyorsa `security-reviewer`'dan gecirir.
-5. `quality-gate` kontrollerini calistirir.
-6. Tum adimlar tamamlandiginda Proje Genel Durum Raporu ile sonuclari bildirir.
-
-Sub-agent'lar birbirleriyle direkt iletisim kuramaz. Her handoff Team Lead uzerinden gerceklesir. Bir agent sorun buldugunda dongu durmaz — sorun cozulene kadar tekrar eder, maksimum 3 dongude cozulmezse kullaniciya eskalasyon yapilir.
+Claude Code'a bir görev verin. Claude Team Lead olarak hareket edecektir.
 
 ---
 
-## Ozellestirme
+## Nasıl Çalışır
 
-- `stack/` klasorune kendi stack profillerinizi ekleyin.
-- `.claude/agents/` icindeki dosyalari duzenleyerek agent davranislarini degistirin.
-- `proje/` icinde proje profilleri olusturarak domain-spesifik kurallar ekleyin.
-- `surec/CLAUDE.md` icinde pipeline kademelerini ve tetikleme kriterlerini ayarlayin.
+1. Claude Code'a bir görev verirsiniz.
+2. Claude (Team Lead olarak) görevi analiz eder, mühendislik modunu ve pipeline kademesini seçer.
+3. Uygulamayı `backend-developer`'a delege eder.
+4. Görev auth veya güvenlik içeriyorsa `security-reviewer`'dan geçirir.
+5. `quality-gate` kontrollerini çalıştırır.
+6. Tüm adımlar tamamlandığında Proje Genel Durum Raporu ile sonuçları bildirir.
+
+Sub-agent'lar birbirleriyle direkt iletişim kuramaz. Her handoff Team Lead üzerinden gerçekleşir. Bir agent sorun bulduğunda döngü durmaz — sorun çözülene kadar tekrar eder, maksimum 3 döngüde çözülmezse kullanıcıya eskalasyon yapılır.
+
+---
+
+## Özelleştirme
+
+- `stack/` klasörüne kendi stack profillerinizi ekleyin.
+- `.claude/agents/` içindeki dosyaları düzenleyerek agent davranışlarını değiştirin.
+- `proje/` içinde proje profilleri oluşturarak domain-spesifik kurallar ekleyin.
+- `surec/CLAUDE.md` içinde pipeline kademelerini ve tetikleme kriterlerini ayarlayın.
 
 ---
 
 ## Gereksinimler
 
 - [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code)
-- Yonetilecek bir backend projesi (.NET, Node.js veya Laravel)
+- Yönetilecek bir backend projesi (.NET, Node.js veya Laravel)
 
 ---
 
